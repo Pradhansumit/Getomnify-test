@@ -39,7 +39,9 @@ class ClassListView(APIView):
         classes = FitnessClass.objects.filter(datetime_ist__gte=now).order_by(
             "datetime_ist"
         )
-        serializer = FitnessClassSerializer(classes, many=True)
+        serializer = FitnessClassSerializer(
+            classes, many=True, context={"request": request}
+        )
         return Response(serializer.data)
 
 
